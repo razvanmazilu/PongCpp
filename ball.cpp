@@ -13,3 +13,8 @@ void Ball::Draw()
 {
     DrawCircle(position.x, position.y, 5, constants::darkGreen);
 }
+
+void Ball::Delete()
+{
+    DrawCircle(position.x, position.y, 5, constants::green);
+}

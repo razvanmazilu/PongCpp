@@ -9,6 +9,7 @@ class Ball
     Ball();
     void Draw();
     void Delete();
+    void Move();
     void CheckColisionWithPaddle();
     void CheckColisionWithMargins();
     void ChangeDirection();
