@@ -1,4 +1,6 @@
 #include<raylib.h>
+#include"paddle.h"
+
 class Ball
 {
     public:
@@ -10,7 +12,11 @@ class Ball
     void Draw();
     void Delete();
     void Move();
-    void CheckColisionWithPaddle();
-    void CheckColisionWithMargins();
+    
     void ChangeDirection();
+
+    private:
+    void PositionUpdate(int x, int y);
+    bool CheckColisionWithMargins();
+    bool CheckColisionWithPaddle(Paddle p);
 };
