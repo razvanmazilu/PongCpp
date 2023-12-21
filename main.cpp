@@ -23,7 +23,7 @@ int main () {
         pLeft.Draw();
         pLeft.Move();
         pRight.Draw();
-        ball.Move();
+        ball.Move(pRight, pLeft);
 
         EndDrawing();
     }

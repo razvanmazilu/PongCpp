@@ -1,5 +1,6 @@
 #include"ball.h"
 #include"common.h"
+#include <iostream>
 Ball::Ball()
 {
     position = {static_cast<float>(constants::width/2), \
@@ -19,20 +20,23 @@ void Ball::Delete()
     DrawCircle(position.x, position.y, 10, constants::green);
 }
 
-void Ball::Move()
+void Ball::Move(Paddle rP, Paddle lP)
 {
     Draw();
 
     //dummy values
-    static int x = 1;
-    static int y = 4;
+    static int x = -5;
+    static int y = 1;
     if(CheckColisionWithMargins())
         y = -y;
+    if(CheckColisionWithPaddle(rP, lP))
+        x = -x;
     PositionUpdate(x, y);
 }
 
 void Ball::PositionUpdate(int x, int y)
 {
+    std::cout<<"new Pos(" << position.x <<", "<<position.y<< ")" <<std::endl;
     position.x += x;
     position.y += y;
 }
@@ -40,17 +44,16 @@ void Ball::PositionUpdate(int x, int y)
 bool Ball::CheckColisionWithMargins()
 {
     if(position.y + 5 >= constants::height || position.y < 15)
-    {
         return true;
-    }
+    
     return false;
 }
 
-bool Ball::CheckColisionWithPaddle(Paddle p)
+bool Ball::CheckColisionWithPaddle(Paddle lP, Paddle rP)
 {
-    /// ???
-    if(position.x + 10 > p.startPos.x || position.x + 10 < p.startPos.x + p.size.x)
+    if(this->position.x + 10 >= constants::width || this->position.x + 10 < 0)
         return true;
 
     return false;
 }
+
