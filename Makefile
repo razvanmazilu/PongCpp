@@ -27,6 +27,7 @@
 PROJECT_NAME       ?= game
 RAYLIB_VERSION     ?= 4.5.0
 RAYLIB_PATH        ?= ..\..
+#RAYLIB_PATH        ?=C:/raylib/raylib
 
 # Define compiler path on Windows
 COMPILER_PATH      ?= C:/raylib/w64devkit/bin
@@ -208,7 +209,8 @@ ifeq ($(PLATFORM),PLATFORM_DESKTOP)
     ifeq ($(PLATFORM_OS),WINDOWS)
         # resource file contains windows executable icon and properties
         # -Wl,--subsystem,windows hides the console window
-        CFLAGS += $(RAYLIB_PATH)/src/raylib.rc.data
+        #CFLAGS += $(RAYLIB_PATH)/src/raylib.rc.data 
+        CFLAGS += C:\raylib\raylib\src\raylib.rc.data
     endif
     ifeq ($(PLATFORM_OS),LINUX)
         ifeq ($(RAYLIB_LIBTYPE),STATIC)
@@ -250,7 +252,7 @@ endif
 
 # Define include paths for required headers
 # NOTE: Several external required libraries (stb and others)
-INCLUDE_PATHS = -I. -I$(RAYLIB_PATH)/src -I$(RAYLIB_PATH)/src/external
+INCLUDE_PATHS = -I. -I$(RAYLIB_PATH)/src -I$(RAYLIB_PATH)/src/external -IC:\raylib\raylib\src
 ifneq ($(wildcard /opt/homebrew/include/.*),)
     INCLUDE_PATHS += -I/opt/homebrew/include
 endif
