@@ -19,12 +19,12 @@ void Paddle::Move()
     switch (keyPressed)
     {
         case KEY_W:
-            startPos.y -= 20;
+            startPos.y -= 60;
             if(startPos.y < 5)
                 startPos.y = 5;
             break;
         case KEY_S:
-            startPos.y += 20;
+            startPos.y += 60;
             if(startPos.y + size.y > 475)
                 startPos.y = 475 - size.y;
             break;

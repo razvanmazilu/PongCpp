@@ -25,7 +25,7 @@ void Ball::Move(Paddle rP, Paddle lP)
     Draw();
 
     //dummy values
-    static int x = -5;
+    static int x = -2;
     static int y = 1;
     if(CheckColisionWithMargins())
         y = -y;
@@ -36,7 +36,7 @@ void Ball::Move(Paddle rP, Paddle lP)
 
 void Ball::PositionUpdate(int x, int y)
 {
-    std::cout<<"new Pos(" << position.x <<", "<<position.y<< ")" <<std::endl;
+   // std::cout<<"new Pos(" << position.x <<", "<<position.y<< ")" <<std::endl;
     position.x += x;
     position.y += y;
 }
@@ -51,8 +51,26 @@ bool Ball::CheckColisionWithMargins()
 
 bool Ball::CheckColisionWithPaddle(Paddle lP, Paddle rP)
 {
-    if(this->position.x + 10 >= constants::width || this->position.x + 10 < 0)
-        return true;
+    if(this->position.x + 35 >= constants::width || this->position.x - 35 < 0)
+    {
+        if(this->position.y > lP.startPos.y && this->position.y < (lP.startPos.y + lP.size.y))
+        {
+            /* debug
+            std::cout<< "ball {" << this->position.x << ", "<<this->position.y<<"}"<<std::endl;
+            std::cout<< "lP startPosition{" << lP.startPos.x << ", "<<lP.startPos.y<<"}"<<std::endl;
+            std::cout<< "lP endPosition{" << lP.startPos.x + lP.size.x << ", "<<lP.startPos.y + lP.size.y<<"}"<<std::endl;*/
+            return true;
+        }
+        
+        if(this->position.y > rP.startPos.y && this->position.y < (rP.startPos.y + rP.size.y))
+        {
+            std::cout<< "ball {" << this->position.x << ", "<<this->position.y<<"}"<<std::endl;
+            std::cout<< "rP startPosition{" << rP.startPos.x << ", "<<rP.startPos.y<<"}"<<std::endl;
+            std::cout<< "rP endPosition{" << rP.startPos.x + lP.size.x << ", "<<rP.startPos.y + rP.size.y<<"}"<<std::endl;
+            return true;
+        }
+        
+    }     
 
     return false;
 }

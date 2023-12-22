@@ -13,17 +13,26 @@ int main () {
     Vector2 startPosPRight = {static_cast<float>(constants::width - 25), 5};
     Vector2 size = {20, static_cast<float>(constants::height/4)};
     Paddle pLeft(startPosPLeft, size);
-    Paddle pRight(startPosPRight, size);
+    Paddle pRight(startPosPRight, {size.x, size.y});
     Ball ball;
+    bool switchPaddle = true;
     while(WindowShouldClose() == false){
 
         BeginDrawing();
         
         ClearBackground(constants::green);
         pLeft.Draw();
-        pLeft.Move();
         pRight.Draw();
-        ball.Move(pRight, pLeft);
+        
+        if(switchPaddle)
+
+            pLeft.Move();
+
+        else
+            pRight.Move();
+
+        switchPaddle = !switchPaddle; 
+        ball.Move(pLeft, pRight);
 
         EndDrawing();
     }
