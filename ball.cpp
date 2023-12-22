@@ -15,11 +15,6 @@ void Ball::Draw()
     DrawCircle(position.x, position.y, 10, constants::darkGreen);
 }
 
-void Ball::Delete()
-{
-    DrawCircle(position.x, position.y, 10, constants::green);
-}
-
 void Ball::Move(Paddle rP, Paddle lP)
 {
     Draw();
@@ -64,9 +59,6 @@ bool Ball::CheckColisionWithPaddle(Paddle lP, Paddle rP)
         
         if(this->position.y > rP.startPos.y && this->position.y < (rP.startPos.y + rP.size.y))
         {
-            std::cout<< "ball {" << this->position.x << ", "<<this->position.y<<"}"<<std::endl;
-            std::cout<< "rP startPosition{" << rP.startPos.x << ", "<<rP.startPos.y<<"}"<<std::endl;
-            std::cout<< "rP endPosition{" << rP.startPos.x + lP.size.x << ", "<<rP.startPos.y + rP.size.y<<"}"<<std::endl;
             return true;
         }
         

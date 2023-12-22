@@ -11,13 +11,11 @@ class Ball
     
     Ball();
     void Draw();
-    void Delete();
     void Move(Paddle lP, Paddle rP);
     
-    void ChangeDirection();
+    bool CheckColisionWithMargins();
+    bool CheckColisionWithPaddle(Paddle lP, Paddle rP);
 
     private:
     void PositionUpdate(int x, int y);
-    bool CheckColisionWithMargins();
-    bool CheckColisionWithPaddle(Paddle lP, Paddle rP);
 };

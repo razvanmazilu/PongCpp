@@ -1,6 +1,10 @@
 #include "paddle.h"
 #include "common.h"
 
+Paddle::Paddle()
+{
+}
+
 Paddle::Paddle(Vector2 startPos, Vector2 size)
 {
     this->startPos = startPos;

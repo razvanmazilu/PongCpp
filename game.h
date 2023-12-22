@@ -10,8 +10,8 @@ public:
     Paddle rightPaddle;
 
     Game();
-    ~Game();
-
-private:
-    bool CheckColisionWithPaddle(Paddle rp, Paddle lP);
+    void MoveBall();
+    void Draw();
+    void PositionUpdate();
+    bool CheckColision();
 };

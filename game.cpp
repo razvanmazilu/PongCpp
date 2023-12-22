@@ -1,14 +1,41 @@
 #include "game.h"
+#include"common.h"
+#include "paddle.h"
+#include "ball.h"
 
 Game::Game()
 {
+    Vector2 ballPos = {constants::width/2, constants::height/2};
+    Vector2 startPosPLeft = {5, 5};
+    Vector2 startPosPRight = {static_cast<float>(constants::width - 25), 5};
+    Vector2 size = {20, static_cast<float>(constants::height/4)};
+    ball = Ball();
+    ball.position = ballPos;
+    leftPaddle = Paddle(startPosPLeft, size);
+    rightPaddle = Paddle(startPosPRight, size);
 }
 
-bool Game::CheckColisionWithPaddle(Paddle rP, Paddle lP)
+void Game::MoveBall()
 {
-    if(ball.position.x + 10 > lP.startPos.x || ball.position.x + 10 < lP.startPos.x + lP.size.x)
-        return true;
-    
-    
-    return false;
+    ball.Move(this->leftPaddle, this->rightPaddle);
+}
+
+void Game::Draw()
+{
+    ball.Draw();
+    leftPaddle.Draw();
+    rightPaddle.Draw();
+}
+
+void Game::PositionUpdate()
+{
+    MoveBall();
+    leftPaddle.Move();
+    rightPaddle.Move();
+}
+
+bool Game::CheckColision()
+{
+    ball.CheckColisionWithPaddle(this->leftPaddle, this->rightPaddle);
+    ball.CheckColisionWithMargins();
 }
