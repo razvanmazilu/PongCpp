@@ -2,6 +2,7 @@
 #include"common.h"
 #include "paddle.h"
 #include "ball.h"
+#include <raylib.h>
 
 Game::Game()
 {
@@ -13,6 +14,8 @@ Game::Game()
     ball.position = ballPos;
     leftPaddle = Paddle(startPosPLeft, size);
     rightPaddle = Paddle(startPosPRight, size);
+    scoreLeftPlayer = 0;
+    scoreRightPlayer = 0;
 }
 
 void Game::MoveBall()
@@ -25,6 +28,11 @@ void Game::Draw()
     ball.Draw();
     leftPaddle.Draw();
     rightPaddle.Draw();
+   // DrawText(TextFormat("%i", scoreLeftPlayer), 150, \
+            0.1*constants::height, 40, constants::darkGreen);
+    
+    //DrawText(TextFormat("%i", scoreRightPlayer), constants::width - 150, \
+            0.1*constants::height, 40, constants::darkGreen);
 }
 
 void Game::PositionUpdate()
@@ -34,8 +42,11 @@ void Game::PositionUpdate()
     rightPaddle.Move();
 }
 
+// bug? unreacheble for moment
 bool Game::CheckColision()
 {
     ball.CheckColisionWithPaddle(this->leftPaddle, this->rightPaddle);
     ball.CheckColisionWithMargins();
+    scoreLeftPlayer += ball.countLeftPaddleHits;
+    scoreRightPlayer += ball.countRightPaddleHits;
 }

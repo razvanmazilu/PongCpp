@@ -4,10 +4,12 @@
 
 class Ball
 {
-    public:
+public:
     Vector2 position;
     int speed;
     Vector2 direction;
+    int countLeftPaddleHits;
+    int countRightPaddleHits;
     
     Ball();
     void Draw();

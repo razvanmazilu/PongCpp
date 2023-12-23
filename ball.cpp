@@ -7,12 +7,20 @@ Ball::Ball()
         static_cast<float>(constants::height/2)};
     speed = 1;
     direction = {0, 1};
+    countLeftPaddleHits = 0;
+    countRightPaddleHits = 0;
 }
 
 
 void Ball::Draw()
 {
     DrawCircle(position.x, position.y, 10, constants::darkGreen);
+    
+    DrawText(TextFormat("%i", countLeftPaddleHits), 150, \
+            0.1*constants::height, 40, constants::darkGreen);
+    
+    DrawText(TextFormat("%i", countRightPaddleHits), constants::width - 150, \
+            0.1*constants::height, 40, constants::darkGreen);
 }
 
 void Ball::Move(Paddle rP, Paddle lP)
@@ -54,11 +62,15 @@ bool Ball::CheckColisionWithPaddle(Paddle lP, Paddle rP)
             std::cout<< "ball {" << this->position.x << ", "<<this->position.y<<"}"<<std::endl;
             std::cout<< "lP startPosition{" << lP.startPos.x << ", "<<lP.startPos.y<<"}"<<std::endl;
             std::cout<< "lP endPosition{" << lP.startPos.x + lP.size.x << ", "<<lP.startPos.y + lP.size.y<<"}"<<std::endl;*/
+            countLeftPaddleHits++;
+            std::cout<<"countLeftPaddleHits = " <<countLeftPaddleHits<<std::endl;
             return true;
         }
         
         if(this->position.y > rP.startPos.y && this->position.y < (rP.startPos.y + rP.size.y))
         {
+            countRightPaddleHits++;
+            std::cout<<"countRightPaddleHits = " <<countRightPaddleHits<<std::endl;
             return true;
         }
         

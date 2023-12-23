@@ -8,6 +8,8 @@ public:
     Ball ball;
     Paddle leftPaddle;
     Paddle rightPaddle;
+    int scoreLeftPlayer;
+    int scoreRightPlayer;
 
     Game();
     void MoveBall();
