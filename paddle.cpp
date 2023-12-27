@@ -7,7 +7,7 @@ void Paddle::Draw()
 
 void Paddle::Update()
 {
-    if(IsKeyDown(KEY_UP)&& position.y >= 0)
+    if(IsKeyDown(KEY_UP) && position.y >= 0)
         position.y = position.y - speed;
 
     if(IsKeyDown(KEY_DOWN) && position.y + size.y <= constants::height)
@@ -17,11 +17,11 @@ void Paddle::Update()
 
 void CpuPaddle::Update(int ball_y)
 {
-    if(position.y + size.y / 2 > ball_y)
+    if(position.y + size.y / 2 > ball_y && position.y >= 0)
     {
         position.y = position.y - speed;
     }
-    if(position.y + size.y / 2 <= ball_y)
+    if(position.y + size.y / 2 <= ball_y && position.y + size.y <= constants::height)
     {
         position.y = position.y + speed;
     }

@@ -14,5 +14,6 @@ public:
 
 class CpuPaddle: public Paddle
 {
-    void Update();
+public:
+    void Update(int ball_y);
 };

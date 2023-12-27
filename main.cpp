@@ -34,7 +34,14 @@ int main ()
         //Updating
         ball.Update();
         player.Update();
+        cpu.Update(ball.position.y);
 
+        //CheckColision
+        if(CheckCollisionCircleRec(ball.position, ball.radius, Rectangle{player.position.x, player.position.y, player.size.x, player.size.y}))
+            ball.speed.x *= - 1;
+
+        if(CheckCollisionCircleRec(ball.position, ball.radius, Rectangle{cpu.position.x, cpu.position.y, cpu.size.x, cpu.size.y}))
+            ball.speed.x *= - 1;
         //Drawing
         ClearBackground(BLACK);
         DrawLine(constants::width / 2, 0, constants::width / 2, constants::height, WHITE);
