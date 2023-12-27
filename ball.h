@@ -11,4 +11,5 @@ public:
     Ball();
     void Draw();
     void Update();
+    void ResetBall();
 };

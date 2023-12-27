@@ -43,11 +43,15 @@ int main ()
         if(CheckCollisionCircleRec(ball.position, ball.radius, Rectangle{cpu.position.x, cpu.position.y, cpu.size.x, cpu.size.y}))
             ball.speed.x *= - 1;
         //Drawing
-        ClearBackground(BLACK);
+        ClearBackground(constants::darkGreen);
+        DrawRectangle(constants::width /2, 0, constants::width, constants::height, constants::green);
+        DrawCircle(constants::width / 2, constants::height / 2, 150, constants::lightGreen);
         DrawLine(constants::width / 2, 0, constants::width / 2, constants::height, WHITE);
         ball.Draw();
         player.Draw();
         cpu.Draw();
+        DrawText(TextFormat("%i", score::cpu), constants::width/4 - 20, 20, 80, WHITE);
+        DrawText(TextFormat("%i", score::player), 3*constants::width/4 - 20, 20, 80, WHITE);
         
         EndDrawing();
     }

@@ -2,7 +2,8 @@
 
 void Paddle::Draw()
 {
-    DrawRectangle(position.x, position.y, size.x, size.y, WHITE);
+    //DrawRectangle(position.x, position.y, size.x, size.y, WHITE);
+    DrawRectangleRounded({position.x, position.y, size.x, size.y}, 6, 6, WHITE);
 }
 
 void Paddle::Update()
