@@ -1,38 +1,28 @@
 #include "paddle.h"
-#include "common.h"
-
-Paddle::Paddle()
-{
-}
-
-Paddle::Paddle(Vector2 startPos, Vector2 size)
-{
-    this->startPos = startPos;
-    this->size = size;
-}
 
 void Paddle::Draw()
 {
-    DrawRectangle(startPos.x, startPos.y, size.x, size.y, constants::darkGreen);
+    DrawRectangle(position.x, position.y, size.x, size.y, WHITE);
 }
 
-void Paddle::Move()
+void Paddle::Update()
 {
-    int keyPressed = GetKeyPressed();
+    if(IsKeyDown(KEY_UP)&& position.y >= 0)
+        position.y = position.y - speed;
 
-    switch (keyPressed)
+    if(IsKeyDown(KEY_DOWN) && position.y + size.y <= constants::height)
+        position.y = position.y + speed;
+
+}
+
+void CpuPaddle::Update(int ball_y)
+{
+    if(position.y + size.y / 2 > ball_y)
     {
-        case KEY_W:
-            startPos.y -= 60;
-            if(startPos.y < 5)
-                startPos.y = 5;
-            break;
-        case KEY_S:
-            startPos.y += 60;
-            if(startPos.y + size.y > 475)
-                startPos.y = 475 - size.y;
-            break;
-        default:
-            break;
+        position.y = position.y - speed;
+    }
+    if(position.y + size.y / 2 <= ball_y)
+    {
+        position.y = position.y + speed;
     }
 }

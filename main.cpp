@@ -1,34 +1,47 @@
 #include <iostream>
-#include<raylib.h>
 #include"common.h"
-#include"paddle.h"
 #include"ball.h"
-#include"game.h"
+#include"paddle.h"
+#include<raylib.h>
 
-int main () {
+int main () 
+{
 
-    std::cout << "Starting the game ..." << std::endl;
-    InitWindow(constants::width, constants::height, "Retro Pong");
+    std::cout<< "Starting the game" << std::endl;
+    Ball ball;
+    Paddle player;
+    CpuPaddle cpu;
+  
+    InitWindow(constants::width, constants::height, "My Pong Game!");
     SetTargetFPS(60);
-    Game game;
-    bool switchPaddle = true;
-    while(WindowShouldClose() == false){
 
+    player.size.y = 120;
+    player.size.x = 25;
+    player.position.x = constants::width - player.size.x - 10;
+    player.position.y = constants::height / 2 - player.size.y / 2;
+    player.speed = 6;
+
+    cpu.size.y = 120;
+    cpu.size.x = 25;
+    cpu.position.x = 10;
+    cpu.position.y = constants::height / 2 - cpu.size.y / 2;
+    cpu.speed = 6;
+
+    while(WindowShouldClose() == false)
+    {
         BeginDrawing();
+
+        //Updating
+        ball.Update();
+        player.Update();
+
+        //Drawing
+        ClearBackground(BLACK);
+        DrawLine(constants::width / 2, 0, constants::width / 2, constants::height, WHITE);
+        ball.Draw();
+        player.Draw();
+        cpu.Draw();
         
-        ClearBackground(constants::green);
-        game.Draw();
-        
-        if(switchPaddle)
-
-            game.leftPaddle.Move();
-
-        else
-            game.rightPaddle.Move();
-
-        switchPaddle = !switchPaddle; 
-        game.MoveBall();
-        //game.CheckColision();
         EndDrawing();
     }
     CloseWindow();

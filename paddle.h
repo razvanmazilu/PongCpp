@@ -1,13 +1,18 @@
 #pragma once
-#include<raylib.h>
-class Paddle 
+#include"common.h"
+
+class Paddle
 {
 public:
-    Vector2 startPos;
+    Vector2 position;
     Vector2 size;
+    int speed;
 
-    Paddle();
-    Paddle(Vector2 startPos, Vector2 size);
     void Draw();
-    void Move();
+    void Update();
+};
+
+class CpuPaddle: public Paddle
+{
+    void Update();
 };
